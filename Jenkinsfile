@@ -4,29 +4,31 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
-                echo 'Creating dummy deploy.conf file...'
+                echo 'Creating deploy.conf and deploy.sh...'
                 sh 'echo "config data" > deploy.conf'
+                sh 'echo "echo Deploying..." > deploy.sh'
+                sh 'chmod +x deploy.sh'
             }
         }
 
-        stage('Check File and Deploy') {
+        stage('Check and Deploy') {
             steps {
                 script {
+                    // Your exact one-liner condition
                     if (sh(script: 'test -f deploy.conf', returnStatus: true) == 0) {
-                        // echo 'File exists, running deploy script...'
-                        sh 'echo "Deploying..."'
+                        sh './deploy.sh'
                     } else {
-                        echo 'deploy.conf not found. Skipping deployment.'
+                        error 'deploy.conf not found — failing build.'
                     }
                 }
             }
         }
     }
 
-    // post {
-    //     always {
-    //         echo 'Cleaning up...'
-    //         sh 'rm -f deploy.conf'
-    //     }
-    // }
+    post {
+        always {
+            echo 'Cleaning up...'
+            sh 'rm -f deploy.conf deploy.sh'
+        }
+    }
 }
