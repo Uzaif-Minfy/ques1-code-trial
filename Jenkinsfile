@@ -14,9 +14,8 @@ pipeline {
         stage('Check and Deploy') {
             steps {
                 script {
-                    // Your exact one-liner condition
+                    // condition
                     if (sh(script: 'test -f deploy.conf', returnStatus: true) == 0) {
-                    // if (fileExists('deploy.conf')) {    
                         sh './deploy.sh'
                     } else {
                         error 'deploy.conf not found — failing build.'
@@ -33,3 +32,5 @@ pipeline {
         }
     }
 }
+
+                       
