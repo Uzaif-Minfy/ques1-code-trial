@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     if (sh(script: 'test -f deploy.conf', returnStatus: true) == 0) {
-                        echo 'File exists, running deploy script...'
+                        // echo 'File exists, running deploy script...'
                         sh 'echo "Deploying..."'
                     } else {
                         echo 'deploy.conf not found. Skipping deployment.'
