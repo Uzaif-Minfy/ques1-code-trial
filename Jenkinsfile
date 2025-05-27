@@ -5,7 +5,7 @@ pipeline {
         stage('Prepare') {
             steps {
                 echo 'Creating dummy deploy.conf file...'
-                sh 'echo "config data" > deploy.conf'
+                // sh 'echo "config data" > deploy.conf'
             }
         }
 
@@ -23,10 +23,10 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            echo 'Cleaning up...'
-            sh 'rm -f deploy.conf'
-        }
-    }
+    // post {
+    //     always {
+    //         echo 'Cleaning up...'
+    //         sh 'rm -f deploy.conf'
+    //     }
+    // }
 }
