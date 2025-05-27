@@ -16,7 +16,7 @@ pipeline {
                 script {
                     // Your exact one-liner condition
                     if (sh(script: 'test -f deploy.conf', returnStatus: true) == 0) {
-                        sh './deploy.sh'
+                        sh 'deploy.sh'
                     } else {
                         error 'deploy.conf not found — failing build.'
                     }
