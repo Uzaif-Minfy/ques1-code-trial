@@ -5,7 +5,7 @@ pipeline {
         stage('Prepare') {
             steps {
                 echo 'Creating dummy deploy.conf file...'
-                // sh 'echo "config data" > deploy.conf'
+                sh 'echo "config data" > deploy.conf'
             }
         }
 
